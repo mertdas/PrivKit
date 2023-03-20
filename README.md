@@ -55,7 +55,7 @@ https://github.com/dtmsecurity/bof_helper
 Microsoft :) <br>
 https://learn.microsoft.com/en-us/windows/win32/api/
 
-HsTechDocs
+HsTechDocs by HelpSystems(Fortra)<br>
 https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/beacon-object-files_how-to-develop.htm
 
 
