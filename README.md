@@ -30,6 +30,9 @@ https://mr.un1k0d3r.world/portal/
 Outflank - C2-Tool-Collection<br>
 https://github.com/outflanknl/C2-Tool-Collection
 
+dtmsecurity - Beacon Object File (BOF) Creation Helper
+https://github.com/dtmsecurity/bof_helper
+
 Microsoft :) <br>
 https://learn.microsoft.com/en-us/windows/win32/api/
 
