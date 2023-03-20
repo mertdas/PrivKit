@@ -15,6 +15,21 @@ PrivKit is a simple beacon object file that detects privilege escalation vulnera
  
  ## Usage
  
+```
+[03/20 00:51:06] beacon> privcheck
+[03/20 00:51:06] [*] Priv Esc Check Bof by @merterpreter
+[03/20 00:51:06] [*] Checking For Unquoted Service Paths..
+[03/20 00:51:06] [*] Checking For Autologon Registry Keys..
+[03/20 00:51:06] [*] Checking For Always Install Elevated Registry Keys..
+[03/20 00:51:06] [*] Checking For Modifiable Autoruns..
+[03/20 00:51:06] [*] Checking For Hijackable Paths..
+[03/20 00:51:06] [*] Enumerating Credentials From Credential Manager..
+[03/20 00:51:06] [*] Checking For Token Privileges..
+[03/20 00:51:06] [+] host called home, sent: 10485 bytes
+[03/20 00:51:06] [+] received output:
+Unquoted Service Path Check Result: Vulnerable service path found: c:\program files (x86)\grasssoft\macro expert\MacroService.exe
+```
+
  Simply load the cna file and type "privcheck"<br>
  If you want to compile by yourself you can use:<br>
 ```x86_64-w64-mingw32-gcc -c cfile.c -o ofile.o```
