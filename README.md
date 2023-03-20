@@ -31,7 +31,7 @@ Outflank - C2-Tool-Collection<br>
 https://github.com/outflanknl/C2-Tool-Collection
 
 Microsoft :) <br>
-learn.microsoft.com/en-us/windows/win32/api/
+https://learn.microsoft.com/en-us/windows/win32/api/
 
 ![privcheck1](https://user-images.githubusercontent.com/48562581/226249192-84da03d5-435a-4da0-a6e6-4c451d2403e4.PNG)
 
