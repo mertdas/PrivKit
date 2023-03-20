@@ -34,7 +34,7 @@ Unquoted Service Path Check Result: Vulnerable service path found: c:\program fi
  If you want to compile by yourself you can use:<br>
 ```x86_64-w64-mingw32-gcc -c cfile.c -o ofile.o```
 
-If you want to look for just one you can use object file with "inline-execute" for example<br>
+If you want to look for just one misconf you can use object file with "inline-execute" for example<br>
 ``` inline-execute /path/tokenprivileges.o```
 
 ![privcheck1](https://user-images.githubusercontent.com/48562581/226249192-84da03d5-435a-4da0-a6e6-4c451d2403e4.PNG)
