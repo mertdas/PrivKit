@@ -37,6 +37,10 @@ Unquoted Service Path Check Result: Vulnerable service path found: c:\program fi
 If you want to look for just one you can use object file with "inline-execute" for example<br>
 ``` inline-execute /path/tokenprivileges.o```
 
+![privcheck1](https://user-images.githubusercontent.com/48562581/226249192-84da03d5-435a-4da0-a6e6-4c451d2403e4.PNG)
+
+![privcheck2](https://user-images.githubusercontent.com/48562581/226249135-a2444998-8c4f-4783-9b60-726c887032e4.PNG)
+
  ## Acknowledgement
  
  Mr.Un1K0d3r - Offensive Coding Portal <br>
@@ -51,8 +55,6 @@ https://github.com/dtmsecurity/bof_helper
 Microsoft :) <br>
 https://learn.microsoft.com/en-us/windows/win32/api/
 
-![privcheck1](https://user-images.githubusercontent.com/48562581/226249192-84da03d5-435a-4da0-a6e6-4c451d2403e4.PNG)
 
-![privcheck2](https://user-images.githubusercontent.com/48562581/226249135-a2444998-8c4f-4783-9b60-726c887032e4.PNG)
 
 
