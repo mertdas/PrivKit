@@ -32,6 +32,8 @@ Unquoted Service Path Check Result: Vulnerable service path found: c:\program fi
 
  Simply load the cna file and type "privcheck"<br>
  If you want to compile by yourself you can use:<br>
+```make all```<br>
+or <br>
 ```x86_64-w64-mingw32-gcc -c cfile.c -o ofile.o```
 
 If you want to look for just one misconf you can use object file with "inline-execute" for example<br>
