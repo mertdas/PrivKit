@@ -27,7 +27,7 @@ void go(char * args, int len) {
             defaultUserNameFound = true;
         }
         dwSize2 = sizeof(szValue);
-        if (Advapi32$RegQueryValueExA(hKey, "Autologon Check Result: DefaultPassword", NULL, &dwType, (LPBYTE)szValue, &dwSize2) == ERROR_SUCCESS) {
+        if (Advapi32$RegQueryValueExA(hKey, "DefaultPassword", NULL, &dwType, (LPBYTE)szValue, &dwSize2) == ERROR_SUCCESS) {
             BeaconPrintf(CALLBACK_OUTPUT, "Autologon Check Result: DefaultPassword: %s\n", szValue);
             defaultPasswordFound = true;
         }
