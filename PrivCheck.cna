@@ -1,0 +1,619 @@
+# PrivCheck.cna
+# Privilege Escalation Check BOFs
+# By @merterpreter && @nickvourd
+
+# ============================================
+# PrivCheck - Run All Checks
+# ============================================
+
+beacon_command_register(
+    "PrivCheck",
+    "Run all privilege escalation checks",
+    "Usage: PrivCheck\n\n" .
+    "Description:\n" .
+    "  Executes all privilege escalation checks in sequence:\n" .
+    "  - AlwaysInstallElevatedCheck\n" .
+    "  - AutologonCheck\n" .
+    "  - CredentialManagerCheck\n" .
+    "  - HijackablePathCheck\n" .
+    "  - ModifiableAutorunCheck\n" .
+    "  - ModifiableSVCCheck\n" .
+    "  - TokenPrivilegesCheck\n" .
+    "  - UnquotedSVCPathCheck\n" .
+    "  - PowerShellHistoryCheck\n" .
+    "  - UACStatusCheck",
+    "bof"
+);
+
+alias PrivCheck {
+    local('$barch $handle $data $bofPath');
+
+    if (size(@_) > 1) {
+        berror($1, "This command does not accept arguments.");
+        berror($1, "Usage: PrivCheck");
+        return;
+    }
+
+    $barch = barch($1);
+
+    btask($1, "");
+    btask($1, "==================================================");
+    btask($1, "  PrivCheck - Privilege Escalation Checks");
+    btask($1, "  BOF by @merterpreter && @nickvourd");
+    btask($1, "==================================================");
+    btask($1, "");
+
+    # AlwaysInstallElevatedCheck
+    $bofPath = script_resource("AlwaysInstallElevatedCheck/AlwaysInstallElevatedCheck. $+ $barch $+ .o");
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+    if (strlen($data) > 0) {
+        btask($1, "[1/10] Running AlwaysInstallElevatedCheck...");
+        beacon_inline_execute($1, $data, "go", $null);
+    } else {
+        berror($1, "[1/10] Could not load AlwaysInstallElevatedCheck BOF");
+    }
+
+    # AutologonCheck
+    $bofPath = script_resource("AutologonCheck/AutologonCheck. $+ $barch $+ .o");
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+    if (strlen($data) > 0) {
+        btask($1, "[2/10] Running AutologonCheck...");
+        beacon_inline_execute($1, $data, "go", $null);
+    } else {
+        berror($1, "[2/10] Could not load AutologonCheck BOF");
+    }
+
+    # CredentialManagerCheck
+    $bofPath = script_resource("CredentialManagerCheck/CredentialManagerCheck. $+ $barch $+ .o");
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+    if (strlen($data) > 0) {
+        btask($1, "[3/10] Running CredentialManagerCheck...");
+        beacon_inline_execute($1, $data, "go", $null);
+    } else {
+        berror($1, "[3/10] Could not load CredentialManagerCheck BOF");
+    }
+
+    # HijackablePathCheck
+    $bofPath = script_resource("HijackablePathCheck/HijackablePathCheck. $+ $barch $+ .o");
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+    if (strlen($data) > 0) {
+        btask($1, "[4/10] Running HijackablePathCheck...");
+        beacon_inline_execute($1, $data, "go", $null);
+    } else {
+        berror($1, "[4/10] Could not load HijackablePathCheck BOF");
+    }
+
+    # ModifiableAutorunCheck
+    $bofPath = script_resource("ModifiableAutorunCheck/ModifiableAutorunCheck. $+ $barch $+ .o");
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+    if (strlen($data) > 0) {
+        btask($1, "[5/10] Running ModifiableAutorunCheck...");
+        beacon_inline_execute($1, $data, "go", $null);
+    } else {
+        berror($1, "[5/10] Could not load ModifiableAutorunCheck BOF");
+    }
+
+    # ModifiableSVCCheck
+    $bofPath = script_resource("ModifiableSVCCheck/ModifiableSVCCheck. $+ $barch $+ .o");
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+    if (strlen($data) > 0) {
+        btask($1, "[6/10] Running ModifiableSVCCheck...");
+        beacon_inline_execute($1, $data, "go", $null);
+    } else {
+        berror($1, "[6/10] Could not load ModifiableSVCCheck BOF");
+    }
+
+    # TokenPrivilegesCheck
+    $bofPath = script_resource("TokenPrivilegesCheck/TokenPrivilegesCheck. $+ $barch $+ .o");
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+    if (strlen($data) > 0) {
+        btask($1, "[7/10] Running TokenPrivilegesCheck...");
+        beacon_inline_execute($1, $data, "go", $null);
+    } else {
+        berror($1, "[7/10] Could not load TokenPrivilegesCheck BOF");
+    }
+
+    # UnquotedSVCPathCheck
+    $bofPath = script_resource("UnquotedSVCPathCheck/UnquotedSVCPathCheck. $+ $barch $+ .o");
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+    if (strlen($data) > 0) {
+        btask($1, "[8/10] Running UnquotedSVCPathCheck...");
+        beacon_inline_execute($1, $data, "go", $null);
+    } else {
+        berror($1, "[8/10] Could not load UnquotedSVCPathCheck BOF");
+    }
+
+    # PowerShellHistoryCheck
+    $bofPath = script_resource("PowerShellHistoryCheck/PowerShellHistoryCheck. $+ $barch $+ .o");
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+    if (strlen($data) > 0) {
+        btask($1, "[9/10] Running PowerShellHistoryCheck...");
+        beacon_inline_execute($1, $data, "go", $null);
+    } else {
+        berror($1, "[9/10] Could not load PowerShellHistoryCheck BOF");
+    }
+
+    # UACStatusCheck
+    $bofPath = script_resource("UACStatusCheck/UACStatusCheck. $+ $barch $+ .o");
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+    if (strlen($data) > 0) {
+        btask($1, "[10/10] Running UACStatusCheck...");
+        beacon_inline_execute($1, $data, "go", $null);
+    } else {
+        berror($1, "[10/10] Could not load UACStatusCheck BOF");
+    }
+
+    btask($1, "");
+    btask($1, "==================================================");
+    btask($1, "  PrivCheck Complete");
+    btask($1, "==================================================");
+}
+
+# ============================================
+# AlwaysInstallElevatedCheck
+# ============================================
+
+beacon_command_register(
+    "AlwaysInstallElevatedCheck",
+    "Check for AlwaysInstallElevated privilege escalation vulnerability",
+    "Usage: AlwaysInstallElevatedCheck\n\n" .
+    "Description:\n" .
+    "  Checks if AlwaysInstallElevated is enabled in both HKCU and HKLM.\n" .
+    "  This misconfiguration allows any user to install MSI packages with\n" .
+    "  SYSTEM privileges.\n\n" .
+    "Vulnerability Conditions:\n" .
+    "  HKCU\\Software\\Policies\\Microsoft\\Windows\\Installer\\AlwaysInstallElevated = 1\n" .
+    "  HKLM\\Software\\Policies\\Microsoft\\Windows\\Installer\\AlwaysInstallElevated = 1\n\n" .
+    "  Both keys must be set to 1 for exploitation.",
+    "bof"
+);
+
+alias AlwaysInstallElevatedCheck {
+    local('$barch $handle $data $bofPath');
+
+    if (size(@_) > 1) {
+        berror($1, "This command does not accept arguments.");
+        berror($1, "Usage: AlwaysInstallElevatedCheck");
+        return;
+    }
+
+    $barch = barch($1);
+    $bofPath = script_resource("AlwaysInstallElevatedCheck/AlwaysInstallElevatedCheck. $+ $barch $+ .o");
+
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+
+    if (strlen($data) == 0) {
+        berror($1, "Could not load BOF file: $bofPath");
+        return;
+    }
+
+    btask($1, "BOF by @merterpreter && @nickvourd");
+    btask($1, "Checking AlwaysInstallElevated privilege escalation vulnerability...");
+
+    beacon_inline_execute($1, $data, "go", $null);
+}
+
+# ============================================
+# AutologonCheck
+# ============================================
+
+beacon_command_register(
+    "AutologonCheck",
+    "Check for stored Autologon credentials in registry",
+    "Usage: AutologonCheck\n\n" .
+    "Description:\n" .
+    "  Checks the Winlogon registry key for stored autologon credentials.\n" .
+    "  If AutoAdminLogon=1 and DefaultPassword is set, credentials are exposed.\n\n" .
+    "Registry Location:\n" .
+    "  HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
+    "bof"
+);
+
+alias AutologonCheck {
+    local('$barch $handle $data $bofPath');
+
+    if (size(@_) > 1) {
+        berror($1, "This command does not accept arguments.");
+        berror($1, "Usage: AutologonCheck");
+        return;
+    }
+
+    $barch = barch($1);
+    $bofPath = script_resource("AutologonCheck/AutologonCheck. $+ $barch $+ .o");
+
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+
+    if (strlen($data) == 0) {
+        berror($1, "Could not load BOF file: $bofPath");
+        return;
+    }
+
+    btask($1, "BOF by @merterpreter && @nickvourd");
+    btask($1, "Checking for stored Autologon credentials...");
+
+    beacon_inline_execute($1, $data, "go", $null);
+}
+
+# ============================================
+# CredentialManagerCheck
+# ============================================
+
+beacon_command_register(
+    "CredentialManagerCheck",
+    "Enumerate credentials from Windows Credential Manager",
+    "Usage: CredentialManagerCheck\n\n" .
+    "Description:\n" .
+    "  Enumerates all stored credentials in Windows Credential Manager\n" .
+    "  for the current user context. Shows target, username, and password.\n\n" .
+    "Note:\n" .
+    "  Only enumerates credentials for the current user/token.\n" .
+    "  Running as SYSTEM will not show user credentials.",
+    "bof"
+);
+
+alias CredentialManagerCheck {
+    local('$barch $handle $data $bofPath');
+
+    if (size(@_) > 1) {
+        berror($1, "This command does not accept arguments.");
+        berror($1, "Usage: CredentialManagerCheck");
+        return;
+    }
+
+    $barch = barch($1);
+    $bofPath = script_resource("CredentialManagerCheck/CredentialManagerCheck. $+ $barch $+ .o");
+
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+
+    if (strlen($data) == 0) {
+        berror($1, "Could not load BOF file: $bofPath");
+        return;
+    }
+
+    btask($1, "BOF by @merterpreter && @nickvourd");
+    btask($1, "Checking Credential Manager...");
+
+    beacon_inline_execute($1, $data, "go", $null);
+}
+
+# ============================================
+# HijackablePathCheck
+# ============================================
+
+beacon_command_register(
+    "HijackablePathCheck",
+    "Check for writable directories in system PATH",
+    "Usage: HijackablePathCheck\n\n" .
+    "Description:\n" .
+    "  Enumerates the system PATH environment variable and checks\n" .
+    "  each directory for write permissions. Writable directories\n" .
+    "  in PATH can be abused for DLL hijacking or binary planting.\n\n" .
+    "Registry Location:\n" .
+    "  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\\Path",
+    "bof"
+);
+
+alias HijackablePathCheck {
+    local('$barch $handle $data $bofPath');
+
+    if (size(@_) > 1) {
+        berror($1, "This command does not accept arguments.");
+        berror($1, "Usage: HijackablePathCheck");
+        return;
+    }
+
+    $barch = barch($1);
+    $bofPath = script_resource("HijackablePathCheck/HijackablePathCheck. $+ $barch $+ .o");
+
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+
+    if (strlen($data) == 0) {
+        berror($1, "Could not load BOF file: $bofPath");
+        return;
+    }
+
+    btask($1, "BOF by @merterpreter && @nickvourd");
+    btask($1, "Checking for hijackable PATH directories...");
+
+    beacon_inline_execute($1, $data, "go", $null);
+}
+
+# ============================================
+# ModifiableAutorunCheck
+# ============================================
+
+beacon_command_register(
+    "ModifiableAutorunCheck",
+    "Check for modifiable autorun executables",
+    "Usage: ModifiableAutorunCheck\n\n" .
+    "Description:\n" .
+    "  Enumerates autorun registry keys and checks if the\n" .
+    "  referenced executables are writable by current user.\n\n" .
+    "Checked Locations:\n" .
+    "  HKLM and HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\n" .
+    "  HKLM and HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce\n" .
+    "  HKLM and HKCU:\\SOFTWARE\\Wow6432Node\\...\\Run (x64 systems)",
+    "bof"
+);
+
+alias ModifiableAutorunCheck {
+    local('$barch $handle $data $bofPath');
+
+    if (size(@_) > 1) {
+        berror($1, "This command does not accept arguments.");
+        berror($1, "Usage: ModifiableAutorunCheck");
+        return;
+    }
+
+    $barch = barch($1);
+    $bofPath = script_resource("ModifiableAutorunCheck/ModifiableAutorunCheck. $+ $barch $+ .o");
+
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+
+    if (strlen($data) == 0) {
+        berror($1, "Could not load BOF file: $bofPath");
+        return;
+    }
+
+    btask($1, "BOF by @merterpreter && @nickvourd");
+    btask($1, "Checking for modifiable autorun entries...");
+
+    beacon_inline_execute($1, $data, "go", $null);
+}
+
+# ============================================
+# TokenPrivilegesCheck
+# ============================================
+
+beacon_command_register(
+    "TokenPrivilegesCheck",
+    "Enumerate current token privileges",
+    "Usage: TokenPrivilegesCheck\n\n" .
+    "Description:\n" .
+    "  Enumerates all privileges for the current process token\n" .
+    "  and shows their enabled/disabled status.",
+    "bof"
+);
+
+alias TokenPrivilegesCheck {
+    local('$barch $handle $data $bofPath');
+
+    if (size(@_) > 1) {
+        berror($1, "This command does not accept arguments.");
+        berror($1, "Usage: TokenPrivilegesCheck");
+        return;
+    }
+
+    $barch = barch($1);
+    $bofPath = script_resource("TokenPrivilegesCheck/TokenPrivilegesCheck. $+ $barch $+ .o");
+
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+
+    if (strlen($data) == 0) {
+        berror($1, "Could not load BOF file: $bofPath");
+        return;
+    }
+
+    btask($1, "BOF by @merterpreter && @nickvourd");
+    btask($1, "Enumerating token privileges...");
+
+    beacon_inline_execute($1, $data, "go", $null);
+}
+
+# ============================================
+# UnquotedSVCPathCheck
+# ============================================
+
+beacon_command_register(
+    "UnquotedSVCPathCheck",
+    "Check for Unquoted Service Paths vulnerability",
+    "Usage: UnquotedSVCPathCheck\n\n" .
+    "Description:\n" .
+    "  Enumerates Windows services and checks for unquoted paths\n" .
+    "  containing spaces. These can be exploited for privilege escalation.\n\n" .
+    "Vulnerability Conditions:\n" .
+    "  - Service path contains spaces\n" .
+    "  - Path is not enclosed in quotes\n" .
+    "  - Path is not in System32/SysWOW64",
+    "bof"
+);
+
+alias UnquotedSVCPathCheck {
+    local('$barch $handle $data $bofPath');
+
+    if (size(@_) > 1) {
+        berror($1, "This command does not accept arguments.");
+        berror($1, "Usage: UnquotedSVCPathCheck");
+        return;
+    }
+
+    $barch = barch($1);
+    $bofPath = script_resource("UnquotedSVCPathCheck/UnquotedSVCPathCheck. $+ $barch $+ .o");
+
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+
+    if (strlen($data) == 0) {
+        berror($1, "Could not load BOF file: $bofPath");
+        return;
+    }
+
+    btask($1, "BOF by @merterpreter && @nickvourd");
+    btask($1, "Checking for Unquoted Service Paths vulnerability...");
+
+    beacon_inline_execute($1, $data, "go", $null);
+}
+
+# ============================================
+# PowerShellHistoryCheck
+# ============================================
+
+beacon_command_register(
+    "PowerShellHistoryCheck",
+    "Check for PowerShell history file",
+    "Usage: PowerShellHistoryCheck\n\n" .
+    "Description:\n" .
+    "  Checks if the PowerShell PSReadLine history file exists.\n" .
+    "  This file may contain sensitive commands, credentials, or secrets.\n\n" .
+    "File Location:\n" .
+    "  %APPDATA%\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt",
+    "bof"
+);
+
+alias PowerShellHistoryCheck {
+    local('$barch $handle $data $bofPath');
+
+    if (size(@_) > 1) {
+        berror($1, "This command does not accept arguments.");
+        berror($1, "Usage: PowerShellHistoryCheck");
+        return;
+    }
+
+    $barch = barch($1);
+    $bofPath = script_resource("PowerShellHistoryCheck/PowerShellHistoryCheck. $+ $barch $+ .o");
+
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+
+    if (strlen($data) == 0) {
+        berror($1, "Could not load BOF file: $bofPath");
+        return;
+    }
+
+    btask($1, "BOF by @merterpreter && @nickvourd");
+    btask($1, "Checking for PowerShell history file...");
+
+    beacon_inline_execute($1, $data, "go", $null);
+}
+
+# ============================================
+# UACStatusCheck
+# ============================================
+
+beacon_command_register(
+    "UACStatusCheck",
+    "Check UAC status, integrity level, and admin membership",
+    "Usage: UACStatusCheck\n\n" .
+    "Description:\n" .
+    "  Checks UAC registry settings, current process integrity level,\n" .
+    "  and local administrator group membership.\n\n" .
+    "Checks Performed:\n" .
+    "  - EnableLUA (UAC enabled/disabled)\n" .
+    "  - ConsentPromptBehaviorAdmin (UAC prompt level)\n" .
+    "  - PromptOnSecureDesktop\n" .
+    "  - Token Integrity Level\n" .
+    "  - Local Administrators group membership",
+    "bof"
+);
+
+alias UACStatusCheck {
+    local('$barch $handle $data $bofPath');
+
+    if (size(@_) > 1) {
+        berror($1, "This command does not accept arguments.");
+        berror($1, "Usage: UACStatusCheck");
+        return;
+    }
+
+    $barch = barch($1);
+    $bofPath = script_resource("UACStatusCheck/UACStatusCheck. $+ $barch $+ .o");
+
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+
+    if (strlen($data) == 0) {
+        berror($1, "Could not load BOF file: $bofPath");
+        return;
+    }
+
+    btask($1, "BOF by @merterpreter && @nickvourd");
+    btask($1, "Checking UAC status, integrity level, and admin membership...");
+
+    beacon_inline_execute($1, $data, "go", $null);
+}
+
+# ============================================
+# ModifiableSVCCheck
+# ============================================
+
+beacon_command_register(
+    "ModifiableSVCCheck",
+    "Check for services with modifiable permissions",
+    "Usage: ModifiableSVCCheck\n\n" .
+    "Description:\n" .
+    "  Enumerates all Windows services and checks their security\n" .
+    "  descriptors to find services that the current user can modify.\n\n" .
+    "Checked Permissions:\n" .
+    "  - SERVICE_CHANGE_CONFIG\n" .
+    "  - WRITE_DAC\n" .
+    "  - WRITE_OWNER\n" .
+    "  - GENERIC_ALL\n" .
+    "  - GENERIC_WRITE\n" .
+    "  - SERVICE_ALL_ACCESS\n\n" .
+    "Exploitation:\n" .
+    "  If a service is modifiable, you can change its binary path\n" .
+    "  to point to a malicious executable for privilege escalation.",
+    "bof"
+);
+
+alias ModifiableSVCCheck {
+    local('$barch $handle $data $bofPath');
+
+    if (size(@_) > 1) {
+        berror($1, "This command does not accept arguments.");
+        berror($1, "Usage: ModifiableSVCCheck");
+        return;
+    }
+
+    $barch = barch($1);
+    $bofPath = script_resource("ModifiableSVCCheck/ModifiableSVCCheck. $+ $barch $+ .o");
+
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+
+    if (strlen($data) == 0) {
+        berror($1, "Could not load BOF file: $bofPath");
+        return;
+    }
+
+    btask($1, "BOF by @merterpreter && @nickvourd");
+    btask($1, "Checking for modifiable services...");
+
+    beacon_inline_execute($1, $data, "go", $null);
+}
