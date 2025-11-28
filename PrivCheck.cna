@@ -17,6 +17,7 @@ beacon_command_register(
     "  - CredentialManagerCheck\n" .
     "  - HijackablePathCheck\n" .
     "  - ModifiableAutorunCheck\n" .
+    "  - ModifiableSVCCheck\n" .
     "  - TokenPrivilegesCheck\n" .
     "  - UnquotedSVCPathCheck\n" .
     "  - PowerShellHistoryCheck\n" .
@@ -48,10 +49,10 @@ alias PrivCheck {
     $data = readb($handle, -1);
     closef($handle);
     if (strlen($data) > 0) {
-        btask($1, "[1/9] Running AlwaysInstallElevatedCheck...");
+        btask($1, "[1/10] Running AlwaysInstallElevatedCheck...");
         beacon_inline_execute($1, $data, "go", $null);
     } else {
-        berror($1, "[1/9] Could not load AlwaysInstallElevatedCheck BOF");
+        berror($1, "[1/10] Could not load AlwaysInstallElevatedCheck BOF");
     }
 
     # AutologonCheck
@@ -60,10 +61,10 @@ alias PrivCheck {
     $data = readb($handle, -1);
     closef($handle);
     if (strlen($data) > 0) {
-        btask($1, "[2/9] Running AutologonCheck...");
+        btask($1, "[2/10] Running AutologonCheck...");
         beacon_inline_execute($1, $data, "go", $null);
     } else {
-        berror($1, "[2/9] Could not load AutologonCheck BOF");
+        berror($1, "[2/10] Could not load AutologonCheck BOF");
     }
 
     # CredentialManagerCheck
@@ -72,10 +73,10 @@ alias PrivCheck {
     $data = readb($handle, -1);
     closef($handle);
     if (strlen($data) > 0) {
-        btask($1, "[3/9] Running CredentialManagerCheck...");
+        btask($1, "[3/10] Running CredentialManagerCheck...");
         beacon_inline_execute($1, $data, "go", $null);
     } else {
-        berror($1, "[3/9] Could not load CredentialManagerCheck BOF");
+        berror($1, "[3/10] Could not load CredentialManagerCheck BOF");
     }
 
     # HijackablePathCheck
@@ -84,10 +85,10 @@ alias PrivCheck {
     $data = readb($handle, -1);
     closef($handle);
     if (strlen($data) > 0) {
-        btask($1, "[4/9] Running HijackablePathCheck...");
+        btask($1, "[4/10] Running HijackablePathCheck...");
         beacon_inline_execute($1, $data, "go", $null);
     } else {
-        berror($1, "[4/9] Could not load HijackablePathCheck BOF");
+        berror($1, "[4/10] Could not load HijackablePathCheck BOF");
     }
 
     # ModifiableAutorunCheck
@@ -96,10 +97,22 @@ alias PrivCheck {
     $data = readb($handle, -1);
     closef($handle);
     if (strlen($data) > 0) {
-        btask($1, "[5/9] Running ModifiableAutorunCheck...");
+        btask($1, "[5/10] Running ModifiableAutorunCheck...");
         beacon_inline_execute($1, $data, "go", $null);
     } else {
-        berror($1, "[5/9] Could not load ModifiableAutorunCheck BOF");
+        berror($1, "[5/10] Could not load ModifiableAutorunCheck BOF");
+    }
+
+    # ModifiableSVCCheck
+    $bofPath = script_resource("ModifiableSVCCheck/ModifiableSVCCheck. $+ $barch $+ .o");
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+    if (strlen($data) > 0) {
+        btask($1, "[6/10] Running ModifiableSVCCheck...");
+        beacon_inline_execute($1, $data, "go", $null);
+    } else {
+        berror($1, "[6/10] Could not load ModifiableSVCCheck BOF");
     }
 
     # TokenPrivilegesCheck
@@ -108,10 +121,10 @@ alias PrivCheck {
     $data = readb($handle, -1);
     closef($handle);
     if (strlen($data) > 0) {
-        btask($1, "[6/9] Running TokenPrivilegesCheck...");
+        btask($1, "[7/10] Running TokenPrivilegesCheck...");
         beacon_inline_execute($1, $data, "go", $null);
     } else {
-        berror($1, "[6/9] Could not load TokenPrivilegesCheck BOF");
+        berror($1, "[7/10] Could not load TokenPrivilegesCheck BOF");
     }
 
     # UnquotedSVCPathCheck
@@ -120,10 +133,10 @@ alias PrivCheck {
     $data = readb($handle, -1);
     closef($handle);
     if (strlen($data) > 0) {
-        btask($1, "[7/9] Running UnquotedSVCPathCheck...");
+        btask($1, "[8/10] Running UnquotedSVCPathCheck...");
         beacon_inline_execute($1, $data, "go", $null);
     } else {
-        berror($1, "[7/9] Could not load UnquotedSVCPathCheck BOF");
+        berror($1, "[8/10] Could not load UnquotedSVCPathCheck BOF");
     }
 
     # PowerShellHistoryCheck
@@ -132,10 +145,10 @@ alias PrivCheck {
     $data = readb($handle, -1);
     closef($handle);
     if (strlen($data) > 0) {
-        btask($1, "[8/9] Running PowerShellHistoryCheck...");
+        btask($1, "[9/10] Running PowerShellHistoryCheck...");
         beacon_inline_execute($1, $data, "go", $null);
     } else {
-        berror($1, "[8/9] Could not load PowerShellHistoryCheck BOF");
+        berror($1, "[9/10] Could not load PowerShellHistoryCheck BOF");
     }
 
     # UACStatusCheck
@@ -144,10 +157,10 @@ alias PrivCheck {
     $data = readb($handle, -1);
     closef($handle);
     if (strlen($data) > 0) {
-        btask($1, "[9/9] Running UACStatusCheck...");
+        btask($1, "[10/10] Running UACStatusCheck...");
         beacon_inline_execute($1, $data, "go", $null);
     } else {
-        berror($1, "[9/9] Could not load UACStatusCheck BOF");
+        berror($1, "[10/10] Could not load UACStatusCheck BOF");
     }
 
     btask($1, "");
@@ -550,6 +563,57 @@ alias UACStatusCheck {
 
     btask($1, "BOF by @merterpreter && @nickvourd");
     btask($1, "Checking UAC status, integrity level, and admin membership...");
+
+    beacon_inline_execute($1, $data, "go", $null);
+}
+
+# ============================================
+# ModifiableSVCCheck
+# ============================================
+
+beacon_command_register(
+    "ModifiableSVCCheck",
+    "Check for services with modifiable permissions",
+    "Usage: ModifiableSVCCheck\n\n" .
+    "Description:\n" .
+    "  Enumerates all Windows services and checks their security\n" .
+    "  descriptors to find services that the current user can modify.\n\n" .
+    "Checked Permissions:\n" .
+    "  - SERVICE_CHANGE_CONFIG\n" .
+    "  - WRITE_DAC\n" .
+    "  - WRITE_OWNER\n" .
+    "  - GENERIC_ALL\n" .
+    "  - GENERIC_WRITE\n" .
+    "  - SERVICE_ALL_ACCESS\n\n" .
+    "Exploitation:\n" .
+    "  If a service is modifiable, you can change its binary path\n" .
+    "  to point to a malicious executable for privilege escalation.",
+    "bof"
+);
+
+alias ModifiableSVCCheck {
+    local('$barch $handle $data $bofPath');
+
+    if (size(@_) > 1) {
+        berror($1, "This command does not accept arguments.");
+        berror($1, "Usage: ModifiableSVCCheck");
+        return;
+    }
+
+    $barch = barch($1);
+    $bofPath = script_resource("ModifiableSVCCheck/ModifiableSVCCheck. $+ $barch $+ .o");
+
+    $handle = openf($bofPath);
+    $data = readb($handle, -1);
+    closef($handle);
+
+    if (strlen($data) == 0) {
+        berror($1, "Could not load BOF file: $bofPath");
+        return;
+    }
+
+    btask($1, "BOF by @merterpreter && @nickvourd");
+    btask($1, "Checking for modifiable services...");
 
     beacon_inline_execute($1, $data, "go", $null);
 }

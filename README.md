@@ -62,6 +62,7 @@ PrivKit offers a comprehensive suite of privilege escalation checks, including:
 | **CredentialManagerCheck** | Dumps credentials from Windows Credential Manager |
 | **HijackablePathCheck** | Identifies writable directories in system PATH |
 | **ModifiableAutorunCheck** | Finds writable autorun executables in Run/RunOnce keys |
+| **ModifiableSVCCheck** | Finds services with modifiable permissions (DACL) |
 | **TokenPrivilegesCheck** | Enumerates current process token privileges |
 | **UnquotedSVCPathCheck** | Detects unquoted service paths with spaces |
 | **PowerShellHistoryCheck** | Checks for PowerShell PSReadLine history file |
@@ -134,6 +135,7 @@ beacon> AutologonCheck
 beacon> CredentialManagerCheck
 beacon> HijackablePathCheck
 beacon> ModifiableAutorunCheck
+beacon> ModifiableSVCCheck
 beacon> TokenPrivilegesCheck
 beacon> UnquotedSVCPathCheck
 beacon> PowerShellHistoryCheck
