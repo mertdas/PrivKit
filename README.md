@@ -208,5 +208,4 @@ Medium
 - [Windows Privilege Escalation - PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md)
 - [WIN32 APIs Microsoft Documentation](https://learn.microsoft.com/en-us/windows/win32/api/)
 - [Offensive Coding by Mr.Un1k0der](https://mr.un1k0d3r.world/portal/)
-- [MALDEV Academy](https://maldevacademy.com/)
 - [Sektor7 Institute](https://institute.sektor7.net/)
