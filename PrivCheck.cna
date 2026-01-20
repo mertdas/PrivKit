@@ -13,7 +13,7 @@ beacon_command_register(
     "Description:\n" .
     "  Executes all privilege escalation checks in sequence:\n" .
     "  - AlwaysInstallElevatedCheck\n" .
-    "  - AutoLogonCheck\n" .
+    "  - AutologonCheck\n" .
     "  - CredentialManagerCheck\n" .
     "  - HijackablePathCheck\n" .
     "  - ModifiableAutorunCheck\n" .
@@ -55,16 +55,16 @@ alias PrivCheck {
         berror($1, "[1/10] Could not load AlwaysInstallElevatedCheck BOF");
     }
 
-    # AutoLogonCheck
-    $bofPath = script_resource("AutoLogonCheck/AutoLogonCheck. $+ $barch $+ .o");
+    # AutologonCheck
+    $bofPath = script_resource("AutologonCheck/AutologonCheck. $+ $barch $+ .o");
     $handle = openf($bofPath);
     $data = readb($handle, -1);
     closef($handle);
     if (strlen($data) > 0) {
-        btask($1, "[2/10] Running AutoLogonCheck...");
+        btask($1, "[2/10] Running AutologonCheck...");
         beacon_inline_execute($1, $data, "go", $null);
     } else {
-        berror($1, "[2/10] Could not load AutoLogonCheck BOF");
+        berror($1, "[2/10] Could not load AutologonCheck BOF");
     }
 
     # CredentialManagerCheck
@@ -216,13 +216,13 @@ alias AlwaysInstallElevatedCheck {
 }
 
 # ============================================
-# AutoLogonCheck
+# AutologonCheck
 # ============================================
 
 beacon_command_register(
-    "AutoLogonCheck",
-    "Check for stored AutoLogon credentials in registry",
-    "Usage: AutoLogonCheck\n\n" .
+    "AutologonCheck",
+    "Check for stored Autologon credentials in registry",
+    "Usage: AutologonCheck\n\n" .
     "Description:\n" .
     "  Checks the Winlogon registry key for stored autologon credentials.\n" .
     "  If AutoAdminLogon=1 and DefaultPassword is set, credentials are exposed.\n\n" .
@@ -231,17 +231,17 @@ beacon_command_register(
     "bof"
 );
 
-alias AutoLogonCheck {
+alias AutologonCheck {
     local('$barch $handle $data $bofPath');
 
     if (size(@_) > 1) {
         berror($1, "This command does not accept arguments.");
-        berror($1, "Usage: AutoLogonCheck");
+        berror($1, "Usage: AutologonCheck");
         return;
     }
 
     $barch = barch($1);
-    $bofPath = script_resource("AutoLogonCheck/AutoLogonCheck. $+ $barch $+ .o");
+    $bofPath = script_resource("AutologonCheck/AutologonCheck. $+ $barch $+ .o");
 
     $handle = openf($bofPath);
     $data = readb($handle, -1);
@@ -253,7 +253,7 @@ alias AutoLogonCheck {
     }
 
     btask($1, "BOF by @merterpreter && @nickvourd");
-    btask($1, "Checking for stored AutoLogon credentials...");
+    btask($1, "Checking for stored Autologon credentials...");
 
     beacon_inline_execute($1, $data, "go", $null);
 }
